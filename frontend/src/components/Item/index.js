@@ -8,6 +8,7 @@ import {
   ITEM_PAGE_UNLOADED,
 } from "../../constants/actionTypes";
 import { getItemAndComments } from "./utils/ItemFetcher";
+import { getImageLink } from "./utils/ItemImage";
 
 const mapStateToProps = (state) => ({
   ...state.item,
@@ -42,13 +43,14 @@ class Item extends React.Component {
     const canModify =
       this.props.currentUser &&
       this.props.currentUser.username === this.props.item.seller.username;
+      const imageLink = getImageLink(this.props.item);
     return (
       <div className="container page" id="item-container">
         <div className="text-dark">
           <div className="row bg-white p-4">
             <div className="col-6">
               <img
-                src={this.props.item.image}
+                src={imageLink}
                 alt={this.props.item.title}
                 className="item-img"
                 style={{ height: "500px", width: "100%", borderRadius: "6px" }}
